@@ -1,6 +1,7 @@
 ﻿using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain;
+using eShop.SharedKernel.Domain.Abstractions;
 using eShop.SharedKernel.Domain.Guards;
 using eShop.SharedKernel.Domain.Results;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Catalog.Domain.Products.Rules;
 
-public class ProductNameRules
+public class ProductNameRules : IValueObjectRules<string>
 {
 
     //public static Result<string> Validate(string name)

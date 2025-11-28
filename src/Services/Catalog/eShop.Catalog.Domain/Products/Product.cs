@@ -1,20 +1,22 @@
 ﻿using eShop.Catalog.Domain.Products.Enums;
 using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.ValueObjects;
+using eShop.SharedKernel.Domain.Enums;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
+using eShop.SharedKernel.Domain.ValueObjects;
 
 namespace eShop.Catalog.Domain.Products;
 
 public class Product : EntityBase<Guid>
 {
     public ProductName Name { get; private set; }
-    public decimal Price { get; private set; }
+    public Money? Price { get; private set; }
     public ProductCode Code { get; private set; }
     public ProductStatus Status { get; private set; }
     public string? Description { get; set; }
 
-    private Product(Guid id, ProductName name, ProductCode code, decimal price,ProductStatus status, string? description = default)
+    private Product(Guid id, ProductName name, ProductCode code, Money? price,ProductStatus status, string? description = default)
         : base(id)
     {
         Name = name;
@@ -28,7 +30,8 @@ public class Product : EntityBase<Guid>
         Guid productId,
         string name,
         string code,
-        decimal price,
+        decimal? price,
+        string? currencyCode,
         ProductStatus status,
         string description  
 ) 
@@ -45,13 +48,21 @@ public class Product : EntityBase<Guid>
             return Result.Failure<Product>(createCodeResult.Error);
         }
 
-        return Result.Success( new Product(productId, createNameResult.Value, createCodeResult.Value, price, ProductStatus.Draft,description));
+        var cr=Currency.FromCode(currencyCode);
+        var m = Money.Create(price.Value, cr.Value);
+
+
+        return Result.Success( new Product(productId, createNameResult.Value, createCodeResult.Value, m.Value, ProductStatus.Draft,description));
     }
 
     public Result Activate()
     {
         if (!Status.CanBeActivated)
             return Result.Failure(ProductErrors.InvalidState);
+        if(Price is null)
+        {
+            return Result.Failure(ProductErrors.InvalidState);
+        }
         Status=ProductStatus.Active;
         return Result.Success();
     }

@@ -1,13 +1,18 @@
 ﻿using eShop.Catalog.Domain.Products.Errors;
 using eShop.SharedKernel.Domain;
+using eShop.SharedKernel.Domain.Abstractions;
 using eShop.SharedKernel.Domain.Guards;
 using eShop.SharedKernel.Domain.Results;
 using System.Text.RegularExpressions;
 
 namespace eShop.Catalog.Domain.Products.Rules;
 
-public class ProductCodeRules
+public sealed class ProductCodeRules:IValueObjectRules<string>
 {
+    private ProductCodeRules()
+    {
+        
+    }
     private const int CodeLength = 10;
 
     private static readonly Regex CodePattern = new(
