@@ -42,8 +42,8 @@ public class ProductCodeRules
 
     public static Result<string> Validate(string code) =>
       ValidationChain.For(code)
-     .Ensure(Guard.Against.NotEmpty, Errors.Errors.Code.Required)
-     .Ensure(c => Guard.Against.Length(c, CodeLength), Errors.Errors.Code.Required)
-     .Ensure(c => Guard.Against.Pattern(c, CodePattern), Errors.Errors.Code.Pattern);
+     .Ensure(Guard.Against.NotEmpty, ProductCodeErrors.Code.Required)
+     .Ensure(c => Guard.Against.Length(c, CodeLength), ProductCodeErrors.Code.Required)
+     .Ensure(c => Guard.Against.Pattern(c, CodePattern), ProductCodeErrors.Code.Pattern);
 
 }

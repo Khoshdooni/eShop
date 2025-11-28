@@ -1,4 +1,5 @@
-﻿using eShop.Catalog.Domain.Products.ValueObjects;
+﻿using eShop.Catalog.Domain.Products.Errors;
+using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain;
 using eShop.SharedKernel.Domain.Guards;
 using eShop.SharedKernel.Domain.Results;
@@ -29,9 +30,9 @@ public class ProductNameRules
     //    return Result.Failure<string>(Errors.Errors.Name.TooShort(3));
     public static Result<string> Validate(string name) =>
         ValidationChain.For(name)
-        .Ensure(Guard.Against.NotEmpty, Errors.Errors.Name.Required)
-        .Ensure(c => Guard.Against.MinLength(c, Min), Errors.Errors.Name.TooShort(Min))
-        .Ensure(c => Guard.Against.MaxLength(c, Max), Errors.Errors.Name.TooLong(Max));
+        .Ensure(Guard.Against.NotEmpty, ProductNameErrors.Name.Required)
+        .Ensure(c => Guard.Against.MinLength(c, Min), ProductNameErrors.Name.TooShort(Min))
+        .Ensure(c => Guard.Against.MaxLength(c, Max), ProductNameErrors.Name.TooLong(Max));
 
     }
 

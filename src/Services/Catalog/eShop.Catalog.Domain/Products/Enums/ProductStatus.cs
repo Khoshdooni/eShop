@@ -14,8 +14,8 @@ public sealed class ProductStatus : Enumeration<ProductStatus>
     {
     }
 
-    public bool CanBeActivated=>this==Draft||this==Inactive;
-    public bool CanBeInactivated=>this==Draft||this==Active;
-    public bool CanBeArchived=>this!=Deleted;
-    public bool CanBeDeleted=>this!=Deleted && this!=Archived;
+    public bool CanBeActivated=> this==Draft || this==Inactive;
+    public bool CanBeInactivated=> this==Draft || this==Active;
+    public bool CanBeArchived=> this!=Deleted;
+    public bool CanBeDeleted=> this!=Deleted && this!=Archived;
 }

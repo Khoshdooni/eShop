@@ -1,4 +1,5 @@
 ﻿using eShop.Catalog.Domain.Products.Enums;
+using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
@@ -46,6 +47,15 @@ public class Product : EntityBase<Guid>
 
         return Result.Success( new Product(productId, createNameResult.Value, createCodeResult.Value, price, ProductStatus.Draft,description));
     }
+
+    public Result Activate()
+    {
+        if (!Status.CanBeActivated)
+            return Result.Failure(ProductErrors.InvalidState);
+        Status=ProductStatus.Active;
+        return Result.Success();
+    }
+
 
     public Result UpdateName(string name) 
     { 

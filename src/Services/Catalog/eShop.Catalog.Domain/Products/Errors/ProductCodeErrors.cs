@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eShop.SharedKernel.Domain.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Catalog.Domain.Products.Errors;
 
-public static partial class Errors
+public static partial class ProductCodeErrors
 {
     public static class Code
     {
