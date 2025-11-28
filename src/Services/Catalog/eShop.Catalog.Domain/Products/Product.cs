@@ -1,7 +1,6 @@
 ﻿using eShop.Catalog.Domain.Products.Enums;
 using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.ValueObjects;
-using eShop.SharedKernel.Domain.Enums;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
 using eShop.SharedKernel.Domain.ValueObjects;
@@ -48,11 +47,12 @@ public class Product : EntityBase<Guid>
             return Result.Failure<Product>(createCodeResult.Error);
         }
 
-        var cr=Currency.FromCode(currencyCode);
-        var m = Money.Create(price.Value, cr.Value);
+        var priceResult=Money.CreateOptional(price,currencyCode);
+        if (priceResult.IsFailure) { 
+            return Result.Failure<Product>(priceResult.Error);
+        }
 
-
-        return Result.Success( new Product(productId, createNameResult.Value, createCodeResult.Value, m.Value, ProductStatus.Draft,description));
+        return Result.Success( new Product(productId, createNameResult.Value, createCodeResult.Value, priceResult.Value, ProductStatus.Draft,description));
     }
 
     public Result Activate()

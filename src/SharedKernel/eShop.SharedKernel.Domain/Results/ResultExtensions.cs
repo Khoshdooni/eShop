@@ -1,9 +1,4 @@
 ﻿using eShop.SharedKernel.Domain.Errors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eShop.SharedKernel.Domain.Results;
 
@@ -23,9 +18,14 @@ public static class ResultExtensions
         return Result<TIn>.Failure(error);
     }
 
-
-
-
-
+    public static Result<TOut> Map<TIn,TOut>(
+        this Result<TIn> result,
+        Func<TIn, TOut> map
+    )
+    {
+        return result.IsSuccess
+            ?Result<TOut>.Success(map(result.Value))
+            :Result<TOut>.Failure(result.Error);
+    }
 
 }
