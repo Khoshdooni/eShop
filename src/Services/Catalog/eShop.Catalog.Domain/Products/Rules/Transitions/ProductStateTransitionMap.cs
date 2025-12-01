@@ -8,7 +8,9 @@ public static class ProductStateTransitionMap
     {
         [ProductStatus.Draft] = new[] { ProductStatus.Active, ProductStatus.Deleted },
         [ProductStatus.Active] = new[] { ProductStatus.Inactive, ProductStatus.Deleted },
+        [ProductStatus.Archived] = Array.Empty<ProductStatus>(),
     };
 
-    public static bool CanTransition(ProductStatus @from, ProductStatus @to) => true;
+    public static bool CanTransition(ProductStatus @from, ProductStatus @to) =>
+        allowedTransitions.TryGetValue(@from, out var next) && next.Contains(@to);
 }
