@@ -1,13 +1,14 @@
 ﻿using eShop.Catalog.Domain.Products.Enums;
 using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.ValueObjects;
+using eShop.SharedKernel.Domain.Abstractions;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
 using eShop.SharedKernel.Domain.ValueObjects;
 
 namespace eShop.Catalog.Domain.Products;
 
-public class Product : EntityBase<Guid>
+public class Product : EntityBase<ProductId>
 {
     public ProductName Name { get; private set; }
     public Money? Price { get; private set; }
@@ -15,7 +16,7 @@ public class Product : EntityBase<Guid>
     public ProductStatus Status { get; private set; }
     public string? Description { get; set; }
 
-    private Product(Guid id, ProductName name, ProductCode code, Money? price,ProductStatus status, string? description = default)
+    private Product(ProductId id, ProductName name, ProductCode code, Money? price,ProductStatus status, string? description = default)
         : base(id)
     {
         Name = name;
@@ -26,13 +27,13 @@ public class Product : EntityBase<Guid>
 
     }
     public static Result<Product> Create(
-        Guid productId,
         string name,
         string code,
         decimal? price,
         string? currencyCode,
         ProductStatus status,
-        string description  
+        string description  ,
+        IIdGenerator<long> generator
 ) 
     { 
         var createNameResult = ProductName.Create(name);
@@ -51,6 +52,8 @@ public class Product : EntityBase<Guid>
         if (priceResult.IsFailure) { 
             return Result.Failure<Product>(priceResult.Error);
         }
+
+        var productId = ProductId.New(generator);
 
         return Result.Success( new Product(productId, createNameResult.Value, createCodeResult.Value, priceResult.Value, ProductStatus.Draft,description));
     }
