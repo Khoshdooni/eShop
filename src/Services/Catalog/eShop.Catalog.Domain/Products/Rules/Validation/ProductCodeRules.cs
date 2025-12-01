@@ -4,13 +4,13 @@ using eShop.SharedKernel.Domain.Guards;
 using eShop.SharedKernel.Domain.Results;
 using System.Text.RegularExpressions;
 
-namespace eShop.Catalog.Domain.Products.Rules;
+namespace eShop.Catalog.Domain.Products.Rules.Validation;
 
-public sealed class ProductCodeRules:IValueObjectRules<string>
+public sealed class ProductCodeRules : IValueObjectRules<string>
 {
     private ProductCodeRules()
     {
-        
+
     }
     private const int CodeLength = 10;
 

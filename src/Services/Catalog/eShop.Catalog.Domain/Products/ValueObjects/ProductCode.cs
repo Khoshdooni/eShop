@@ -1,4 +1,4 @@
-﻿using eShop.Catalog.Domain.Products.Rules;
+﻿using eShop.Catalog.Domain.Products.Rules.Validation;
 using eShop.SharedKernel.Domain.Results;
 using eShop.SharedKernel.Domain.ValueObjects;
 

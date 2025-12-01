@@ -1,6 +1,5 @@
 ﻿namespace eShop.SharedKernel.Domain.Abstractions;
 
-public interface IIdGenerator<out T>
+public interface IAggregateRoot
 {
-    T NewId();
 }

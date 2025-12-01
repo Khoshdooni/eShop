@@ -20,12 +20,19 @@ public static class ResultExtensions
 
     public static Result<TOut> Map<TIn,TOut>(
         this Result<TIn> result,
-        Func<TIn, TOut> map
-    )
-    {
-        return result.IsSuccess
+        Func<TIn, TOut> map)=>
+    
+         result.IsSuccess
             ?Result<TOut>.Success(map(result.Value))
             :Result<TOut>.Failure(result.Error);
-    }
+   
 
+    public static Result<TOut> Bind<TIn, TOut>(
+    this Result<TIn> result,
+    Func<TIn, Result<TOut>> next)=>
+    
+         result.IsSuccess
+            ? next(result.Value)
+            : Result<TOut>.Failure(result.Error);
+   
 }
