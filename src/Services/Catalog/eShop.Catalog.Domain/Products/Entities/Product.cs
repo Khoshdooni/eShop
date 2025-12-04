@@ -1,5 +1,6 @@
 ﻿using eShop.Catalog.Domain.Products.Enums;
 using eShop.Catalog.Domain.Products.Errors;
+using eShop.Catalog.Domain.Products.Events;
 using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
@@ -28,6 +29,7 @@ public class Product : AggregateRoot<ProductId>
         Status = ProductStatus.Draft;
         Description = description;
 
+        RaiseDomainEvent(new ProductCreatedDomainEvent(Id, Name, Code));
     }
     public static Result<Product> Create(
         Guid productId,
@@ -89,6 +91,8 @@ public class Product : AggregateRoot<ProductId>
             return Result.Failure(ProductErrors.InvalidState);
         }
         Status = ProductStatus.Active;
+
+        RaiseDomainEvent(new ProductActivatedDomainEvent(Id));
         return Result.Success();
     }
 
@@ -115,5 +119,20 @@ public class Product : AggregateRoot<ProductId>
 
         Code = result.Value;
         return Result.Success();
+    }
+
+    public override Result EnsureInvariants()
+    {
+        //چک کردن اینواریانت خودش
+        //چک کردن ایواریانت واریانت ها 
+
+        throw new NotImplementedException();
+    }
+
+    public void AddVariant()
+    {
+        //?Transition(deleted,archived)
+        //?Business(variantDublicateName)
+        //?Invariant
     }
 }

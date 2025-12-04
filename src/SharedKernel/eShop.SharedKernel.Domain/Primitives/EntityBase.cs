@@ -1,8 +1,10 @@
 ﻿using eShop.SharedKernel.Domain.Abstractions;
+using eShop.SharedKernel.Domain.Results;
+using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.SharedKernel.Domain.Primitives;
 
-public abstract class EntityBase<TId> : IEntity<TId>
+public abstract class EntityBase<TId> : IEntity<TId>, IHasInvariant
     where TId : notnull
 {
     public TId Id { get; }
@@ -30,4 +32,7 @@ public abstract class EntityBase<TId> : IEntity<TId>
     }
 
     public override int GetHashCode() => Id.GetHashCode() ^ 31;
+
+    public abstract Result EnsureInvariants();
+
 }

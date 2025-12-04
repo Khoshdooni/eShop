@@ -1,8 +1,9 @@
 ﻿using eShop.SharedKernel.Domain.Abstractions;
+using eShop.SharedKernel.Domain.Exceptions;
 
 namespace eShop.SharedKernel.Domain.Primitives;
 
-public class AggregateRoot<TId> : EntityBase<TId>, IAggregateRoot
+public abstract class AggregateRoot<TId> : EntityBase<TId>, IAggregateRoot
     where TId : notnull
 {
     private readonly List<IDomainEvent> _domainEvents = new();
@@ -13,6 +14,14 @@ public class AggregateRoot<TId> : EntityBase<TId>, IAggregateRoot
 
     }
 
-    protected void RaiseDomainEvent(IDomainEvent @event) => _domainEvents.Add(@event);
+    protected void RaiseDomainEvent(IDomainEvent @event)
+    {
+        var ensure = EnsureInvariants();
+        if (ensure.IsFailure)
+        {
+            throw new DomainException(ensure.Error);
+        }
+        _domainEvents.Add(@event);
+    }
     protected void ClearDomainEvent() => _domainEvents.Clear();
 }
