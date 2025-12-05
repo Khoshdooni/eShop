@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Products\Rules\Business\" />
-    <Folder Include="Products\Rules\Invariants\" />
   </ItemGroup>
 
 </Project>

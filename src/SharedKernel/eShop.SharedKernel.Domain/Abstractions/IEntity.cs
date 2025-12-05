@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace eShop.SharedKernel.Domain.Abstractions;
 
-namespace eShop.SharedKernel.Domain.Abstractions;
+public interface IEntity { }
 
-public interface IEntity<out TId>
+public interface IEntity<out TId> : IEntity
 {
     TId Id { get; }
 }
