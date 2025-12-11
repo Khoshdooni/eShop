@@ -1,6 +1,7 @@
 ﻿using eShop.Catalog.Domain.Products.Enums;
 using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.Events;
+using eShop.Catalog.Domain.Products.Rules.Invariants;
 using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
@@ -14,6 +15,8 @@ public class Product : AggregateRoot<ProductId>
     public ProductCode Code { get; private set; }
     public ProductStatus Status { get; private set; }
     public string? Description { get; set; }
+    private readonly List<Variant> _variants = new();
+    public IReadOnlyCollection<Variant> Variants => _variants.AsReadOnly();
 
     private Product(
         ProductId id,
@@ -124,15 +127,28 @@ public class Product : AggregateRoot<ProductId>
     public override Result EnsureInvariants()
     {
         //چک کردن اینواریانت خودش
-        //چک کردن ایواریانت واریانت ها 
+
+        //ActiveProductMustHavePriceRule
+        //ActiveVariantMustHaveColorRule
+
+        //چک کردن اینواریانت واریانت ها 
 
         throw new NotImplementedException();
     }
 
-    public void AddVariant()
+    public Result AddVariant(Guid id, string name, string color, string size)
     {
         //?Transition(deleted,archived)
         //?Business(variantDublicateName)
         //?Invariant
+        var rule = new ActiveProductMustHavePriceRule();
+        var isBroken = rule.IsBroken(this);
+        if (isBroken)
+        {
+            return Result.Failure(rule.Error);
+        }
+
+
+        return Result.Success();
     }
 }
