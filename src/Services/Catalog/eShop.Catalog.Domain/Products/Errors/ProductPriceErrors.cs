@@ -3,14 +3,14 @@
 namespace eShop.Catalog.Domain.Products.Errors;
 
 
-public static partial class ProductPriceErrors
+public static partial class ProductErrors
 {
     public static class Price
     {
-        public static readonly Error Empty = Error.Validation(
+        public static readonly Error ActiveProductMustHavePrice = Error.Validation(
 
-            "Product.Price.Empty",
-            "Product Price cannot be zero"
+            "Product.Price.ActiveProductMustHavePrice",
+            "When product is active must have price"
 
         );
     }

@@ -10,7 +10,7 @@ namespace eShop.Catalog.Domain.Products.Entities;
 public class Product : AggregateRoot<ProductId>
 {
     public ProductName Name { get; private set; }
-    public Money? Price { get; private set; }
+    public Money? BasePrice { get; private set; }
     public ProductCode Code { get; private set; }
     public ProductStatus Status { get; private set; }
     public string? Description { get; set; }
@@ -19,13 +19,13 @@ public class Product : AggregateRoot<ProductId>
         ProductId id,
         ProductName name,
         ProductCode code,
-        Money? price,
+        Money? basePrice,
         string? description = default)
         : base(id)
     {
         Name = name;
         Code = code;
-        Price = price;
+        BasePrice = basePrice;
         Status = ProductStatus.Draft;
         Description = description;
 
@@ -86,7 +86,7 @@ public class Product : AggregateRoot<ProductId>
     {
         if (!Status.CanBeActivated)
             return Result.Failure(ProductErrors.InvalidState);
-        if (Price is null)
+        if (BasePrice is null)
         {
             return Result.Failure(ProductErrors.InvalidState);
         }
