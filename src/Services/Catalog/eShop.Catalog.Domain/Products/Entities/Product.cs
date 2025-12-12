@@ -5,6 +5,7 @@ using eShop.Catalog.Domain.Products.Rules.Invariants;
 using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
+using eShop.SharedKernel.Domain.Rules;
 using eShop.SharedKernel.Domain.ValueObjects;
 namespace eShop.Catalog.Domain.Products.Entities;
 
@@ -17,6 +18,9 @@ public class Product : AggregateRoot<ProductId>
     public string? Description { get; set; }
     private readonly List<Variant> _variants = new();
     public IReadOnlyCollection<Variant> Variants => _variants.AsReadOnly();
+
+    private readonly Image _image = new();
+    public Image Image => _image;
 
     private Product(
         ProductId id,
@@ -124,31 +128,51 @@ public class Product : AggregateRoot<ProductId>
         return Result.Success();
     }
 
-    public override Result EnsureInvariants()
-    {
-        //چک کردن اینواریانت خودش
+    //public override Result EnsureInvariants()
+    //{
+    //    //چک کردن اینواریانت خودش
 
-        //ActiveProductMustHavePriceRule
-        //ActiveVariantMustHaveColorRule
+    //    //ActiveProductMustHavePriceRule
+    //    //ActiveVariantMustHaveColorRule
 
-        //چک کردن اینواریانت واریانت ها 
+    //    //چک کردن اینواریانت واریانت ها 
 
-        throw new NotImplementedException();
-    }
-
-    public Result AddVariant(Guid id, string name, string color, string size)
-    {
-        //?Transition(deleted,archived)
-        //?Business(variantDublicateName)
-        //?Invariant
-        var rule = new ActiveProductMustHavePriceRule();
-        var isBroken = rule.IsBroken(this);
-        if (isBroken)
-        {
-            return Result.Failure(rule.Error);
-        }
+    //    throw new NotImplementedException();
+    //}
+    public override Result EnsureInvariants() =>
+        InvariantChain
+        .For(this)
+        .Include(new ActiveProductMustHavePriceRule())
+        .IncludeNested(_variants.ToArray())
+        // .IncludeNested(_image)
+        .EnsureValid();
 
 
-        return Result.Success();
-    }
+    //public Result AddVariant(Guid id, string name, string color, string size)
+    //{
+    //    //?Transition(deleted,archived)
+    //    //?Business(variantDublicateName)
+    //    //?Invariant
+    //    var rule = new ActiveProductMustHavePriceRule();
+    //    var isBroken = rule.IsBroken(this);
+    //    if (isBroken)
+    //    {
+    //        return Result.Failure(rule.Error);
+    //    }
+
+    //    return Result.Success();
+    //}
+    public Result AddVariant(Guid id, string name, string color, string size) =>
+        ValidationChain
+        .For((id, name, color, size))
+        .Bind(v => Variant.Create(v.id, v.name, v.color, v.size))
+        .Bind(
+
+
+
+
+
+             );
+
+
 }

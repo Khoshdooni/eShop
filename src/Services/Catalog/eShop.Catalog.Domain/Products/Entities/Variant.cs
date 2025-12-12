@@ -1,5 +1,7 @@
-﻿using eShop.SharedKernel.Domain.Primitives;
+﻿using eShop.Catalog.Domain.Products.Rules.Invariants;
+using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
+using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Entities;
 
@@ -21,10 +23,13 @@ public class Variant : EntityBase<Guid>
         return Result.Success(new Variant(id, name, color, size));
     }
 
-    public override Result EnsureInvariants()
-    {
-        throw new NotImplementedException();
-    }
+    public override Result EnsureInvariants() =>
+        InvariantChain
+        .For(this)
+        .Include(new ActiveVariantMustHaveColorRule())
+        .Include(new ActiveVariantMustHaveSizeRule())
+        .EnsureValid();
+
     internal void Activate() => IsActive = true;
 
     //? Activate (Color, Size)

@@ -10,8 +10,4 @@
     <ProjectReference Include="..\..\..\SharedKernel\eShop.SharedKernel.Domain\eShop.SharedKernel.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Products\Rules\Business\" />
-  </ItemGroup>
-
 </Project>
