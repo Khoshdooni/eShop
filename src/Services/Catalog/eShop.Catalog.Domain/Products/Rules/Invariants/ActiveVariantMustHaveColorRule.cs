@@ -1,4 +1,5 @@
-﻿using eShop.Catalog.Domain.Products.Errors;
+using eShop.Catalog.Domain.Products.Entities;
+using eShop.Catalog.Domain.Products.Errors;
 using eShop.SharedKernel.Domain.Errors;
 using eShop.SharedKernel.Domain.Rules;
 

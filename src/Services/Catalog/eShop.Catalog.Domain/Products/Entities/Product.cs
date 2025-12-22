@@ -1,4 +1,4 @@
-﻿using eShop.Catalog.Domain.Products.Enums;
+using eShop.Catalog.Domain.Products.Enums;
 using eShop.Catalog.Domain.Products.Errors;
 using eShop.Catalog.Domain.Products.Events;
 using eShop.Catalog.Domain.Products.Rules.Invariants;
@@ -9,15 +9,29 @@ using eShop.SharedKernel.Domain.Rules;
 using eShop.SharedKernel.Domain.ValueObjects;
 namespace eShop.Catalog.Domain.Products.Entities;
 
-internal class Product : AggregateRoot<ProductId>
+internal sealed partial class Product : AggregateRoot<ProductId>
 {
-    public ProductName Name { get; private set; }
-    public Money? BasePrice { get; private set; }
-    public ProductCode Code { get; private set; }
-    public ProductStatus Status { get; private set; }
-    public string? Description { get; set; }
-    private readonly List<Variant> _variants = new();
-    public IReadOnlyCollection<Variant> Variants => _variants.AsReadOnly();
+    public ProductName Name
+    {
+        get; private set;
+    }
+    public Money? BasePrice
+    {
+        get; private set;
+    }
+    public ProductCode Code
+    {
+        get; private set;
+    }
+    public ProductStatus Status
+    {
+        get; private set;
+    }
+    public string? Description
+    {
+        get; set;
+    }
+
 
     private readonly Image _image = new();
     public Image Image => _image;
@@ -38,6 +52,8 @@ internal class Product : AggregateRoot<ProductId>
 
         RaiseDomainEvent(new ProductCreatedDomainEvent(Id, Name, Code));
     }
+    private readonly List<Variant> _variants = new();
+    public IReadOnlyCollection<Variant> Variants => _variants.AsReadOnly();
     public static Result<Product> Create(
         Guid productId,
         string name,
@@ -162,17 +178,17 @@ internal class Product : AggregateRoot<ProductId>
 
     //    return Result.Success();
     //}
-    public Result AddVariant(Guid id, string name, string color, string size) =>
-        ValidationChain
-        .For((id, name, color, size))
-        .Bind(v => Variant.Create(v.id, v.name, v.color, v.size))
-        .Bind(
+    //public Result AddVariant(Guid id, string name, string color, string size) =>
+    //    ValidationChain
+    //    .For((id, name, color, size))
+    //    .Bind(v => Variant.Create(v.id, v.name, v.color, v.size))
+    //    .Bind(
 
 
 
 
 
-             );
+    //         );
 
 
 }

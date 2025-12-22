@@ -1,4 +1,4 @@
-﻿using eShop.Catalog.Domain.Products.ValueObjects;
+using eShop.Catalog.Domain.Products.ValueObjects;
 using eShop.SharedKernel.Domain.Abstractions;
 
 namespace eShop.Catalog.Domain.Products.Events;
@@ -12,7 +12,7 @@ internal sealed record ProductCreatedDomainEvent(
     public DateTime OccurredOn { get; } = DateTime.UtcNow;
 }
 
-public sealed record ProductActivatedDomainEvent(
+internal sealed record ProductActivatedDomainEvent(
     ProductId prooductId
 ) : IDomainEvent
 {

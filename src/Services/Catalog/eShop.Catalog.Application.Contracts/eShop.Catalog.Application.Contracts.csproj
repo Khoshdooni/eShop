@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Products\Commands\" />
     <Folder Include="Products\Events\" />
     <Folder Include="Products\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SharedKernel\eShop.SharedKernel.Application\eShop.SharedKernel.Application.csproj" />
   </ItemGroup>
 
 </Project>

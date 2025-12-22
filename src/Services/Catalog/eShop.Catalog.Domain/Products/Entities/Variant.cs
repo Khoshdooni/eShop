@@ -1,16 +1,28 @@
-﻿using eShop.Catalog.Domain.Products.Rules.Invariants;
+using eShop.Catalog.Domain.Products.Rules.Invariants;
 using eShop.SharedKernel.Domain.Primitives;
 using eShop.SharedKernel.Domain.Results;
 using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Entities;
 
-private class Variant : EntityBase<Guid>
+internal class Variant : EntityBase<Guid>
 {
-    public string Name { get; private set; }
-    public string? Color { get; private set; }
-    public string? Size { get; private set; }
-    public bool IsActive { get; private set; }
+    public string Name
+    {
+        get; private set;
+    }
+    public string? Color
+    {
+        get; private set;
+    }
+    public string? Size
+    {
+        get; private set;
+    }
+    public bool IsActive
+    {
+        get; private set;
+    }
     private Variant(Guid id, string name, string color, string size) : base(id)
     {
         Name = name;
