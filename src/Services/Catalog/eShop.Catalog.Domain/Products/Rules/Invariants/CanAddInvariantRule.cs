@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Rules.Invariants;
 
-public class CanAddInvariantRule : ITransitionRule<Product>
+internal class CanAddInvariantRule : ITransitionRule<Product>
 {
     public Error Error => throw new NotImplementedException();
 

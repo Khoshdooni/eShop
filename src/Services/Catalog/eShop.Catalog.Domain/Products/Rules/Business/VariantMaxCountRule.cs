@@ -4,7 +4,7 @@ using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Rules.Business;
 
-public class VariantMaxCountRule : ICheckRule<Product>
+internal class VariantMaxCountRule : ICheckRule<Product>
 {
     private const int MAX_COUNT = 30;
     public Error Error => throw new NotImplementedException();

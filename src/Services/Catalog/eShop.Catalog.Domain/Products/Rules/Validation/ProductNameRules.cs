@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Results;
 
 namespace eShop.Catalog.Domain.Products.Rules.Validation;
 
-public class ProductNameRules : IValueObjectRules<string>
+internal class ProductNameRules : IValueObjectRules<string>
 {
 
     //public static Result<string> Validate(string name)

@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Results;
 
 namespace eShop.Catalog.Domain.Products.ValueObjects;
 
-public record ProductId : IdBase<Guid>
+internal record ProductId : IdBase<Guid>
 {
     public ProductId(Guid value)
         : base(value) { }

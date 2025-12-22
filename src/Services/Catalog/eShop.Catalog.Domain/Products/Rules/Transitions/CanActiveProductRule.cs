@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Rules.Transitions;
 
-public class CanActiveProductRule : ITransitionRule<Product>
+internal class CanActiveProductRule : ITransitionRule<Product>
 {
     public Error Error => throw new NotImplementedException();
 

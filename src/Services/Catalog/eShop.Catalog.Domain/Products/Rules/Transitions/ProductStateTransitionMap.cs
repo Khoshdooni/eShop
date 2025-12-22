@@ -2,7 +2,7 @@
 
 namespace eShop.Catalog.Domain.Products.Rules.Transitions;
 
-public static class ProductStateTransitionMap
+internal static class ProductStateTransitionMap
 {
     private static readonly Dictionary<ProductStatus, ProductStatus[]> allowedTransitions = new()
     {

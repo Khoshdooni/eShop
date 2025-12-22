@@ -3,7 +3,7 @@
 namespace eShop.Catalog.Domain.Products.Errors;
 
 
-public static partial class ProductErrors
+internal static partial class ProductErrors
 {
     public static class Price
     {

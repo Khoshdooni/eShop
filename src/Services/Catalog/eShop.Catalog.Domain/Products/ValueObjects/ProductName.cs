@@ -4,7 +4,7 @@ using eShop.SharedKernel.Domain.ValueObjects;
 
 namespace eShop.Catalog.Domain.Products.ValueObjects;
 
-public record ProductName
+internal record ProductName
 {
     public string Value { get; }
     public ProductName(string value) => Value = value;

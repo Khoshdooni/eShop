@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace eShop.Catalog.Domain.Products.Rules.Validation;
 
-public sealed class ProductCodeRules : IValueObjectRules<string>
+internal sealed class ProductCodeRules : IValueObjectRules<string>
 {
     private ProductCodeRules()
     {

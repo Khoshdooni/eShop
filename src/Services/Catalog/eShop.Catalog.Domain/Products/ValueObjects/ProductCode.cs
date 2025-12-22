@@ -4,7 +4,7 @@ using eShop.SharedKernel.Domain.ValueObjects;
 
 namespace eShop.Catalog.Domain.Products.ValueObjects;
 
-public record ProductCode
+internal record ProductCode
 {
     public string Value { get; }
     public ProductCode(string value) => Value = value;
@@ -19,7 +19,7 @@ public record ProductCode
 
     //    return Result.Success(new ProductCode(value));
     //}
-    public static Result<ProductCode> Create(string value)=>    
-        ValueObjectFactory.Create(value,ProductCodeRules.Validate,v=>new ProductCode(v));
-    
+    public static Result<ProductCode> Create(string value) =>
+        ValueObjectFactory.Create(value, ProductCodeRules.Validate, v => new ProductCode(v));
+
 }

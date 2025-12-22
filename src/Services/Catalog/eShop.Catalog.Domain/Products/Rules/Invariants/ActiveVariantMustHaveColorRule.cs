@@ -1,11 +1,10 @@
-﻿using eShop.Catalog.Domain.Products.Entities;
-using eShop.Catalog.Domain.Products.Errors;
+﻿using eShop.Catalog.Domain.Products.Errors;
 using eShop.SharedKernel.Domain.Errors;
 using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Rules.Invariants;
 
-public class ActiveVariantMustHaveColorRule : ICheckRule<Variant>
+internal class ActiveVariantMustHaveColorRule : ICheckRule<Variant>
 {
     public Error Error => ProductErrors.Variant.MustHaveColorWhenActive;
 

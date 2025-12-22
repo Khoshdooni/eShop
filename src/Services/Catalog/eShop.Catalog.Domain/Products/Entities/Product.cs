@@ -9,7 +9,7 @@ using eShop.SharedKernel.Domain.Rules;
 using eShop.SharedKernel.Domain.ValueObjects;
 namespace eShop.Catalog.Domain.Products.Entities;
 
-public class Product : AggregateRoot<ProductId>
+internal class Product : AggregateRoot<ProductId>
 {
     public ProductName Name { get; private set; }
     public Money? BasePrice { get; private set; }

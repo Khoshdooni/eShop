@@ -3,7 +3,7 @@ using eShop.SharedKernel.Domain.Abstractions;
 
 namespace eShop.Catalog.Domain.Products.Events;
 
-public sealed record ProductCreatedDomainEvent(
+internal sealed record ProductCreatedDomainEvent(
     ProductId prooductId,
     ProductName name,
     ProductCode code

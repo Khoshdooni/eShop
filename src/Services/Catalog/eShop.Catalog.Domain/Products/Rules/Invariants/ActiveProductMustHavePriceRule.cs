@@ -6,7 +6,7 @@ using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Rules.Invariants;
 
-public class ActiveProductMustHavePriceRule : ICheckRule<Product>
+internal class ActiveProductMustHavePriceRule : ICheckRule<Product>
 {
     public Error Error => ProductErrors.Price.ActiveProductMustHavePrice;
 

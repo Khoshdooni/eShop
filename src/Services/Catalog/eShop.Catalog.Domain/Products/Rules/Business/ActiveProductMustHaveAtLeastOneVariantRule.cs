@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Rules.Business;
 
-public class ActiveProductMustHaveAtLeastOneVariantRule : ICheckRule<Product>
+internal class ActiveProductMustHaveAtLeastOneVariantRule : ICheckRule<Product>
 {
     public Error Error => throw new NotImplementedException();
 

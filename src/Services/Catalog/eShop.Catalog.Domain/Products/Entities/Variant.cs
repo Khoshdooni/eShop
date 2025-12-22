@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Rules;
 
 namespace eShop.Catalog.Domain.Products.Entities;
 
-public class Variant : EntityBase<Guid>
+private class Variant : EntityBase<Guid>
 {
     public string Name { get; private set; }
     public string? Color { get; private set; }

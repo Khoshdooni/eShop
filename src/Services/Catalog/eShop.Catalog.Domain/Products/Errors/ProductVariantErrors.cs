@@ -2,9 +2,9 @@
 
 namespace eShop.Catalog.Domain.Products.Errors;
 
-public static partial class ProductErrors
+internal static partial class ProductErrors
 {
-    public static class Variant
+    internal static class Variant
     {
         public static readonly Error MustHaveColorWhenActive = Error.Validation(
 

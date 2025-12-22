@@ -2,7 +2,7 @@
 
 namespace eShop.Catalog.Domain.Products.Errors;
 
-public static partial class ProductErrors
+internal static partial class ProductErrors
 {
     public static Error InvalidState => Error.Validation("Product.InvalidState", $"Invalid state transition");
 
