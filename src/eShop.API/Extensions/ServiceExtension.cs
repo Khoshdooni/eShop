@@ -10,7 +10,8 @@ public static class ServiceExtension
     )
     {
         services
-            .AddOpenApi()
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen()
             .AddExceptionHandler<GlobalExceptionHandler>()
             .AddProblemDetails()
             .AddCatalogServices(configuration)

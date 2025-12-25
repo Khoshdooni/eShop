@@ -1,5 +1,4 @@
 using eShop.FrameWork.Presentation.Extensions;
-using Scalar.AspNetCore;
 
 namespace eShop.API.Extensions;
 
@@ -12,7 +11,6 @@ public static class MiddlewareExtension
         if (app.Environment.IsDevelopment())
         {
             // app.MapOpenApi();
-            app.MapScalarApiReference();
             app.MapGet("/", () => Results.Redirect("/scalar")).WithTags("Root");
         }
 

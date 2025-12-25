@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FrameWork\eShop.FrameWork.Infrastructure\eShop.FrameWork.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
