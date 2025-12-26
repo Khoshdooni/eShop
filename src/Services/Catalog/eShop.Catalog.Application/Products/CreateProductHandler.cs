@@ -5,7 +5,7 @@ using eShop.SharedKernel.Domain.Results;
 
 namespace eShop.Catalog.Application.Products;
 
-public class CreateProductHandler(IIdGenerator<Guid> idGenerator) : ICommandHandler<CreateProductCommand, CreateProductResponse>
+internal class CreateProductHandler(IIdGenerator<Guid> idGenerator) : ICommandHandler<CreateProductCommand, CreateProductResponse>
 {
     public Task<Result<CreateProductResponse>> Handle(CreateProductCommand request, CancellationToken token)
     {
