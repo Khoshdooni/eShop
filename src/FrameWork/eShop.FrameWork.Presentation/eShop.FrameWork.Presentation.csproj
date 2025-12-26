@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Catalog\eShop.Catalog.Application.Contracts\eShop.Catalog.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\SharedKernel\eShop.SharedKernel.Application\eShop.SharedKernel.Application.csproj" />
   </ItemGroup>
 
 </Project>

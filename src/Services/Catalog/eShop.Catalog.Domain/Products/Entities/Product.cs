@@ -27,7 +27,7 @@ internal sealed partial class Product : AggregateRoot<ProductId>
     {
         get; private set;
     }
-    public string? Description
+    public string? message
     {
         get; set;
     }
@@ -41,14 +41,14 @@ internal sealed partial class Product : AggregateRoot<ProductId>
         ProductName name,
         ProductCode code,
         Money? basePrice,
-        string? description = default)
+        string? message = default)
         : base(id)
     {
         Name = name;
         Code = code;
         BasePrice = basePrice;
         Status = ProductStatus.Draft;
-        Description = description;
+        message = message;
 
         RaiseDomainEvent(new ProductCreatedDomainEvent(Id, Name, Code));
     }
@@ -61,7 +61,7 @@ internal sealed partial class Product : AggregateRoot<ProductId>
         decimal? price,
         string? currencyCode,
         ProductStatus status,
-        string? description
+        string? message
 
 ) => ValidationChain
         .For(productId)
@@ -69,7 +69,7 @@ internal sealed partial class Product : AggregateRoot<ProductId>
         .Bind(id => ProductName.Create(name).Map(n => (id, n)))
         .Bind(t => ProductCode.Create(code).Map(c => (t.id, t.n, c)))
         .Bind(t => Money.CreateOptional(price, currencyCode).Map(p => (t.id, t.n, t.c, p)))
-        .Map(t => new Product(t.id, t.n, t.c, t.p, description));
+        .Map(t => new Product(t.id, t.n, t.c, t.p, message));
 
     // { 
     //var createNameResult = ProductName.Create(name);
@@ -102,7 +102,7 @@ internal sealed partial class Product : AggregateRoot<ProductId>
     //        createCodeResult.Value, 
     //        priceResult.Value, 
     //        ProductStatus.Draft,
-    //        description));
+    //        message));
     // }
 
     public Result Activate()

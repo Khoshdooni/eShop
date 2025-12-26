@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace eShop.SharedKernel.Domain.Errors;
 
 public class Error
@@ -14,47 +8,59 @@ public class Error
         "Unexpected error occurred.",
         ErrorType.Problem
     );
-    public string Code { get; }
-    public string Description { get; }
-    public ErrorType Type { get; }
-    public Error? InnerError { get; }
+    public string Code
+    {
+        get;
+    }
+    public string Message
+    {
+        get;
+    }
+    public ErrorType Type
+    {
+        get;
+    }
+    public Error? InnerError
+    {
+        get;
+    }
 
     private const string Separator = ":";
 
-    public Error(string code, string description, ErrorType type, Error? innerError = null)
+    public Error(string code, string message, ErrorType type, Error? innerError = null)
     {
         Code = code;
-        Description = description;
+        Message = message;
         Type = type;
         InnerError = innerError;
     }
 
     public Error WithInner(Error inner) =>
-        new($"{inner.Code}.{Code}", $"{Description} ? {inner.Description}", Type, inner);
+        new($"{inner.Code}.{Code}", $"{Message} ? {inner.Message}", Type, inner);
 
     public override string ToString() =>
-        $"{Type} | {Code}{Separator} {Description}"
+        $"{Type} | {Code}{Separator} {Message}"
         + (InnerError is null ? "" : $" [Inner: {InnerError}]");
 
     public static implicit operator string(Error error) => error.Code;
 
-    public static Error Validation(string code, string description) =>
-        new(code, description, ErrorType.Validation);
+    public static Error Validation(string code, string message) =>
+        new(code, message, ErrorType.Validation);
 
-    public static Error Business(string code, string description) =>
-        new(code, description, ErrorType.Business);
+    public static Error Business(string code, string message) =>
+        new(code, message, ErrorType.Business);
 
-    public static Error NotFound(string code, string description) =>
-        new(code, description, ErrorType.NotFound);
+    public static Error NotFound(string code, string message) =>
+        new(code, message, ErrorType.NotFound);
 
-    public static Error Conflict(string code, string description) =>
-        new(code, description, ErrorType.Conflict);
+    public static Error Conflict(string code, string message) =>
+        new(code, message, ErrorType.Conflict);
 
-    public static Error Unauthorized(string code, string description) =>
-        new(code, description, ErrorType.Unauthorized);
+    public static Error Unauthorized(string code, string message) =>
+        new(code, message, ErrorType.Unauthorized);
 
-    public static Error Problem(string code, string description) =>
-        new(code, description, ErrorType.Problem);
+    public static Error Problem(string code, string message) =>
+        new(code, message, ErrorType.Problem);
 }
 
 

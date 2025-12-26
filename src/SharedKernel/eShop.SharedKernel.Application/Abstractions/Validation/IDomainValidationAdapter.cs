@@ -2,7 +2,7 @@ using eShop.SharedKernel.Domain.Results;
 
 namespace eShop.SharedKernel.Application.Abstractions.Validation;
 
-public interface IDomainValidationAdapter<T>
+public interface IDomainValidationAdapter<in T>
 {
-    Result<T> Validate(T Value);
+    Result Validate(T Value);
 }

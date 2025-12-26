@@ -17,6 +17,6 @@ internal class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.Property(m => m.BasePrice).IsRequired().HasPrecision(10, 3);
 
-        builder.Property(m => m.Description).IsRequired(false).IsUnicode().HasMaxLength(250);
+        builder.Property(m => m.message).IsRequired(false).IsUnicode().HasMaxLength(250);
     }
 }

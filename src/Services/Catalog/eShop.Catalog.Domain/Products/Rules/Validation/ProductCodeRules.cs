@@ -1,4 +1,4 @@
-﻿using eShop.Catalog.Domain.Products.Errors;
+using eShop.Catalog.Domain.Products.Errors;
 using eShop.SharedKernel.Domain.Abstractions;
 using eShop.SharedKernel.Domain.Guards;
 using eShop.SharedKernel.Domain.Results;
@@ -23,12 +23,12 @@ internal sealed class ProductCodeRules : IValueObjectRules<string>
     //{
     //    //var nameEmptyGuard = Guard.Against.NotNullOrEmpty(code, $"Code is Required");
     //    //if (nameEmptyGuard.IsFailure)
-    //    //    return Result.Failure<string>(Error.Problem($"ProductCodeRules.Validate.{nameEmptyGuard.Error.Code}", nameEmptyGuard.Error.Description));
+    //    //    return Result.Failure<string>(Error.Problem($"ProductCodeRules.Validate.{nameEmptyGuard.Error.Code}", nameEmptyGuard.Error.message));
 
     //    //var nameLengthGuard = Guard.Against.Length(code, 3, 30, $"Code  should be in range");
     //    //if (nameLengthGuard.IsFailure)
 
-    //    //    return Result.Failure<string>(Error.Problem($"ProductCodeRules.Validate.{nameLengthGuard.Error.Code}", nameLengthGuard.Error.Description));
+    //    //    return Result.Failure<string>(Error.Problem($"ProductCodeRules.Validate.{nameLengthGuard.Error.Code}", nameLengthGuard.Error.message));
 
     //    return code.ToResult().Ensure(c => string.IsNullOrEmpty(c), Errors.Errors.Code.Required);  
 
