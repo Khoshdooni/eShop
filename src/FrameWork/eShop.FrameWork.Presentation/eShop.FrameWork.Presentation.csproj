@@ -10,6 +10,7 @@
 	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Catalog\eShop.Catalog.Application.Contracts\eShop.Catalog.Application.Contracts.csproj" />

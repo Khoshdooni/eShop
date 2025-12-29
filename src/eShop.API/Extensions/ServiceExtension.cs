@@ -13,10 +13,12 @@ public static class ServiceExtension
     )
     {
         services
-            .AddOpenApi()
+           //.AddOpenApi()
+           .AddEndpointsApiExplorer()
+           .AddSwaggerGen()
             .AddExceptionHandler<GlobalExceptionHandler>()
             .AddProblemDetails()
-            .AddCatalogServices(configuration)
+            //.AddCatalogServices(configuration)
             // .AddSecurityServices(configuration, Security.Presentation.AssemblyReference.Reference)
             .AddScoped<IIdGenerator<Guid>, GuidGenerator>()
             .AddCors(setup =>

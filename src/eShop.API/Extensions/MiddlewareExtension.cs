@@ -10,8 +10,8 @@ public static class MiddlewareExtension
 
         if (app.Environment.IsDevelopment())
         {
-            // app.MapOpenApi();
-            app.MapGet("/", () => Results.Redirect("/scalar")).WithTags("Root");
+            //app.MapOpenApi();
+            app.MapGet("/", () => Results.Redirect("/swagger")).WithTags("Root");
         }
 
         app.MapEndpoints();
